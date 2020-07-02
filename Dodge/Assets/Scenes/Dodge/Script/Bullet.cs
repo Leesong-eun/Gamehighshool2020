@@ -18,13 +18,13 @@ public class Bullet : MonoBehaviour
         Rigidbody rigidbody = /*gameObject.*/GetComponent<Rigidbody>();
 
 
-        //transform.position += Vector3.left * m_Speed * Time.deltaTime;
+
         rigidbody.AddForce(transform.forward * m_Speed);
 
         m_DestroyCooltime -= Time.deltaTime;
 
         if (m_DestroyCooltime <= 0)
-            gameObject.SetActive(false);
+            Destroy(gameObject);
     }
      private void OnTriggerEnter(Collider other)
     { 
