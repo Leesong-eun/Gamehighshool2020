@@ -32,6 +32,7 @@ public class PlayerController_Dungeon2 : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        GameManager_Durngeon2 gameManager_Dungeon2gameManager = FindObjectOfType<GameManager_Durngeon2>();
+        gameManager_Dungeon2gameManager.ReturnToStartPoint1();
     }
 }

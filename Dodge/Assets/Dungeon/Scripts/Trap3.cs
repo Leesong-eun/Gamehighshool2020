@@ -28,12 +28,12 @@ public class Trap3 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody != null)
-        {
-            var player = collision.rigidbody.GetComponent<PlayerController_Dungeon2>();
-            if (player != null)
-                player.Die();
-        }
+        //if (collision.rigidbody != null)
+        //{
+        //    var player = collision.rigidbody.GetComponent<PlayerController_Dungeon2>();
+        //    if (player != null)
+        //        player.Die();
+        //}
 
         Debug.Log("Collision이 어떤 Collision과 충돌이 일어 났을 때");
     }
