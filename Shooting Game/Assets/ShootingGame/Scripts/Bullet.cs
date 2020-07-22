@@ -6,10 +6,10 @@ public class Bullet : MonoBehaviour
 {
     public float m_Speed = 2f;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 movement = transform.up * m_Speed * Time.deltaTime;
+        Vector3 velocity = transform.up * m_Speed;
+        Vector3 movement = velocity * Time.deltaTime;
         transform.position += movement;
-    }   
+    }
 }

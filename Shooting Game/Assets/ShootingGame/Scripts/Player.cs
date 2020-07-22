@@ -1,26 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    void Start()
+    public float m_Speed = 1f;
+
+    public Bullet m_BulletPrefab;
+    public float m_AttackDelay = 0.5f;
+    public float m_AttackCooldown = 0f;
+
+    public Transform[] m_FireMuzzles;
+
+    private void Update()
     {
-        
-    }
+        float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");
+        Vector2 inputValue = new Vector2(xAxis, yAxis).normalized;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKey(KeyCode.UpArrow))
-            transform.position += new Vector3(0, 6, 0) * Time.deltaTime;
-        if (Input.GetKey(KeyCode.DownArrow))
-            transform.position -= new Vector3(0, 6, 0) * Time.deltaTime;
-        if (Input.GetKey(KeyCode.RightArrow))
-            transform.position += new Vector3(6, 0, 0) * Time.deltaTime;
-        if (Input.GetKey(KeyCode.LeftArrow))
-            transform.position -= new Vector3(6, 0, 0) * Time.deltaTime;
+        Vector3 movement = inputValue * m_Speed * Time.deltaTime;
+        transform.position += movement;
 
-
+        //총알 발사
+        if(Input.GetKey(KeyCode.Space)&& m_AttackCooldown <= 0)
+        {
+            //총알 생성
+            foreach (var fireMuzzle in m_FireMuzzles)
+            {
+                var bullet = GameObject.Instantiate(m_BulletPrefab,
+                    fireMuzzle.position, fireMuzzle.rotation);
+            }
+            m_AttackCooldown = m_AttackDelay;
+        }
+        m_AttackCooldown -= Time.deltaTime;
     }
 }
